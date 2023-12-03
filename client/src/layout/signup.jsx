@@ -23,7 +23,7 @@ function SignUp() {
     };
 
     return (
-        <div className='w-[30%] h-[85%] bg-white rounded-lg shadow-lg flex flex-row justify-center items-center'>
+        <div className='w-[30%] h-[85%] bg-white rounded-lg shadow-lg flex flex-row '>
             <div className='header'>
                 <div className='text-center p-10 text-3xl'>MoneyMinder</div>
             </div>
@@ -41,8 +41,8 @@ function SignUp() {
                     <input type="password" name="" id="" className='border p-1' placeholder='Enter Password' />
                 </div>
             </div>
-            <div className='pt-8 bg-red-50'>
-                <button className='rounded-full bg-gradient-to-r from-cyan-500 to-green-500 text-2xl p-3 px-4 text-white-100'>Sign-Up</button>
+            <div className='flex justify-center items-center'>
+                <button className='rounded-full bg-gray-200 p-4'>Sign-Up</button>
             </div>
         </div>
 
