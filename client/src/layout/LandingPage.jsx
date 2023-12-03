@@ -1,4 +1,5 @@
 import React from "react";
+import Chart from "../components/MainGraph";
 
 function LandingPage() {
   return (
@@ -210,6 +211,9 @@ function LandingPage() {
           </ul>
         </div>
       </aside>
+      <div className="flex flex-col p-4">
+        <Chart />
+      </div>
     </div>
   );
 }
