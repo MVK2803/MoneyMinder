@@ -2,7 +2,7 @@ import React from "react";
 import SideBar from "../assets/components/SideBar";
 import TopBar from "../assets/components/TopBar";
 import Transactions from "../assets/components/Transaction";
-import Chart from "../components/MainGraph";
+import Chart from "../assets/components/MainGraph";
 
 function LandingPage() {
   const isDarkMode =
