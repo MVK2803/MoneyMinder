@@ -38,10 +38,10 @@ const calculateBalance = (income, expense) => {
   };
 
 const Chart = () => {
-     data.datasets.find(dataset => dataset.label === "Income").data;
-     data.datasets.find(dataset => dataset.label === "Expense").data;
-  
-    data.datasets.find(dataset => dataset.label === "Balance").data = calculateBalance(incomeData, expenseData);
+     const chartOptions = {
+        maintainAspectRatio: true, // Set to false to make the chart fill its container
+        responsive: true,
+      };
   
     return (
       <div className="w-5/6">
@@ -49,7 +49,7 @@ const Chart = () => {
           <CurrencyDollarIcon className="w-5 h-5 mr-2" color="rgba(0, 217, 84,1)" />
           Current Balance
         </span>
-        <Line data={data} />
+        <Line data={data} options={chartOptions} />
       </div>
     );
   }

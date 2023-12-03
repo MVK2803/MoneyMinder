@@ -14,9 +14,10 @@ function LandingPage() {
       <SideBar />
       <div className="w-full h-full  flex flex-col  items-center ">
         <TopBar />
-        <hr className="w-full h-[1px] bg-gray-200" />
+        <hr className="w-full h-[1px] bg-gray-200"/>
 
-        <Transactions />
+        {/* <Transactions /> */}
+        <Chart />
       </div>
     </div>
   );
