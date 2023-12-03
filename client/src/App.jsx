@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import LandingPage from './layout/LandingPage'
+import LandingPage from './layout/LandingPage'
 import SignUp from './layout/signup.jsx'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
 
     <div className="absolute w-full h-full bg-slate-300  flex items-center justify-center">
-      <SignUp />
+      <LandingPage />
     </div>
   )
 }
