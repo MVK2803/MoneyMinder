@@ -10,6 +10,7 @@ function LandingPage() {
       <div className="w-full h-full  flex flex-col   ">
         <TopBar />
         <hr className="w-full h-[1px] bg-gray-200" />
+      <div className="w-full h-full  flex flex-col items-center justify-center"><Chart/></div>
       </div>
     </div>
   );
