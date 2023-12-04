@@ -2,6 +2,8 @@ import React from "react";
 import SideBar from "../assets/components/SideBar";
 import TopBar from "../assets/components/TopBar";
 import Transactions from "../assets/components/Transaction";
+import Chart from "../assets/components/MainGraph";
+
 function LandingPage() {
   const isDarkMode =
     window.matchMedia &&
@@ -12,9 +14,10 @@ function LandingPage() {
       <SideBar />
       <div className="w-full h-full  flex flex-col  items-center ">
         <TopBar />
-        <hr className="w-full h-[1px] bg-gray-200" />
+        <hr className="w-full h-[1px] bg-gray-200"/>
 
-        <Transactions />
+        {/* <Transactions /> */}
+        <Chart />
       </div>
     </div>
   );
