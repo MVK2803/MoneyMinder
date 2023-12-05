@@ -1,45 +1,53 @@
+import { useState, useEffect } from "react";
+
 export default function Transactions() {
-  const transactions = [
-    {
+  const [transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const fetchTransactions = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/transactions");
+      const data = await response.json();
+      setTransactions(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addTransaction = async () => {
+    // Replace this with your form data or logic to get transaction details
+    const newTransaction = {
       date: "03-12-2023",
       time: "21:30",
+      category: "Food",
+      description: "Bought groceries",
+      amount: "130.02",
       type: 1,
-      description: "Lorem ipsum dolor",
-      amount: "13002",
-    },
-    {
-      date: "03-12-2023",
-      time: "21:30",
-      type: 0,
-      description: "Lorem ipsum dolor",
-      amount: "13002",
-    },
-    {
-      date: "03-12-2023",
-      time: "21:30",
-      type: 1,
-      description: "Lorem ipsum dolor",
-      amount: "13002",
-    },
-    {
-      date: "03-12-2023",
-      time: "21:30",
-      type: 0,
-      description: "Lorem ipsum dolor",
-      amount: "13002",
-    },
-    {
-      date: "03-12-2023",
-      time: "21:30",
-      type: 1,
-      description: "Lorem ipsum dolor",
-      amount: "13002",
-    },
-  ];
+      user_id: 1
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTransaction),
+      });
+
+      const data = await response.json();
+      setTransactions([...transactions, data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+ 
   return (
     <div className="w-[90%] overflow-hidden  flex flex-col space-y-2">
       <div className=" w-full h-fit flex pt-3 items-right ">
-        <button className="bg-black text-white rounded-md p-3 ml-auto">
+        <button className="bg-black text-white rounded-md p-3 ml-auto" onClick={addTransaction}>
           + Add transaction
         </button>
       </div>
@@ -58,7 +66,7 @@ export default function Transactions() {
           <div key={index} className={`flex border-b-2 p-2`}>
             <div className="w-[10%]">{transaction.date}</div>
             <div className="w-[10%]">{transaction.time}</div>
-            <div className="w-[20%]">Laptop</div>
+            <div className="w-[20%]">{transaction.category}</div>
             <div className="w-[40%]">{transaction.description}</div>
             <div
               className={`w-[20%] ${

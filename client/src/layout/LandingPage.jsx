@@ -16,8 +16,8 @@ function LandingPage() {
         <TopBar />
         <hr className="w-full h-[1px] bg-gray-200"/>
 
-        {/* <Transactions /> */}
-        <Chart />
+        <Transactions />
+        {/* <Chart /> */}
       </div>
     </div>
   );
