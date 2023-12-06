@@ -1,4 +1,5 @@
 export default function loginPage() {
+  const name="Mathew"
   return (
     <div className="w-[60%] h-[75%] bg-white rounded-xl shadow-lg flex flex-row">
       <div class="w-[50%] h-full bg-blue-200 rounded-l-xl ">
@@ -34,7 +35,7 @@ export default function loginPage() {
             <p className="px-2">Remember Me</p>
           </div>
           <div>
-            <button className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8">
+            <button onClick={()=>{alert("Welcome "+name)}}className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8">
               Login to your Account
             </button>
           </div>

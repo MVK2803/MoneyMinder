@@ -48,11 +48,8 @@ const Chart = () => {
   };
   
   return (
-    <div className="w-5/6">
-      <span className="flex flex-row items-center ml-2 mb-2 font-bold text-[14px] text-oceanblue">
-        <CurrencyDollarIcon className="w-5 h-5 mr-2" color="rgba(0, 217, 84,1)" />
-        Current Balance
-      </span>
+    <div className="w-[90%] h-[90%] flex items-center flex-col justify-center ">
+      
       <Line data={data} options={chartOptions} />
     </div>
   );

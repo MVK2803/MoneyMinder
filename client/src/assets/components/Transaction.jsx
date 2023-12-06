@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import TransactionForm from './TransactionForm';
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([]);
+  const [showTransactionForm, setShowTransactionForm] = useState(false);
   useEffect(() => {
     fetchTransactions();
   }, []);
@@ -50,7 +52,10 @@ export default function Transactions() {
   return (
     <div className="w-[90%] overflow-hidden  flex flex-col space-y-2">
       <div className=" w-full h-fit flex pt-3 items-right ">
-        <button className="bg-black text-white rounded-md p-3 ml-auto" onClick={addTransaction}>
+        <button className="bg-black text-white rounded-md p-3 ml-auto" onClick={() => {
+          setShowTransactionForm(!showTransactionForm);
+          console.log(showTransactionForm);
+          }}>
           + Add transaction
         </button>
       </div>
@@ -81,6 +86,7 @@ export default function Transactions() {
           </div>
         ))}
       </div>
+      {showTransactionForm && <TransactionForm onClose={() => {setShowTransactionForm(false)}}/>}
     </div>
   );
 }
