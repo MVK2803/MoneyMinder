@@ -30,6 +30,16 @@ function SignUp() {
         </h>
       </div>
       <div className="items-center flex flex-col justify-center space-y-5 ">
+      <div className=" flex items-center space-x-5  w-[75%] ">
+          <img src={user_icon} alt="" classname="w-30 h-30" />
+          <input
+            type="text"
+            name=""
+            id=""
+            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
+            placeholder="User Name"
+          />
+        </div>
         <div className=" flex items-center space-x-5  w-[75%] ">
           <img src={user_icon} alt="" classname="w-30 h-30" />
           <input
@@ -80,6 +90,11 @@ function SignUp() {
             placeholder="Confirm Password"
           />
         </div>
+        <div>
+            <button className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8">
+              Create Account
+            </button>
+          </div>
       </div>
     </div>
   );

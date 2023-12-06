@@ -41,7 +41,6 @@ app.post("/api/v1/addTransaction", async (req, res) => {
       'INSERT INTO transactions (user_id, date, time, category, description, amount, type) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
       [user_id, date, time, category, description, amount, type]
     );
-    //res.status(201).json({message: 'Successfully added transaction'});
     res.json(result.rows[0]);
   } catch (error) {
     console.error(error);
