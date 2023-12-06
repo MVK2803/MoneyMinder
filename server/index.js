@@ -33,17 +33,16 @@ app.use("/api/v1/transactions", async (req, res) => {
 });
 
 // Endpoint to add a new transaction to the database
-app.post("/api/v1/transactions", async (req, res) => {
-  const { date, time, category, description, amount, type } = req.body;
-
+app.post("/api/v1/addTransaction", async (req, res) => {
+  const { date, time, category, description, amount, type, user_id } = req.body.body;
+  console.log(req.body.body);
   try {
     const result = await db.query(
       'INSERT INTO transactions (user_id, date, time, category, description, amount, type) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-      [1, date, time, category, description, amount, type]
+      [user_id, date, time, category, description, amount, type]
     );
+    //res.status(201).json({message: 'Successfully added transaction'});
     res.json(result.rows[0]);
-    console.log(result.rows);
-    res.status(200).json({ message: 'Successfully added transaction' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState([]);
@@ -10,6 +11,7 @@ export default function Transactions() {
     try {
       const response = await fetch("http://localhost:3000/api/v1/transactions");
       const data = await response.json();
+      console.log(data);
       setTransactions(data);
     } catch (error) {
       console.error(error);
@@ -29,15 +31,16 @@ export default function Transactions() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/transactions", {
+      const response = await axios.post("http://localhost:3000/api/v1/addTransaction", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newTransaction),
+        body: (newTransaction),
       });
 
-      const data = await response.json();
+      const data = await response.data;
+      console.log(data);
       setTransactions([...transactions, data]);
     } catch (error) {
       console.error(error);
@@ -64,7 +67,7 @@ export default function Transactions() {
       <div className="overflow-y-auto flex flex-col h-[500px]">
         {transactions.map((transaction, index) => (
           <div key={index} className={`flex border-b-2 p-2`}>
-            <div className="w-[10%]">{transaction.date}</div>
+            <div className="w-[10%]">{new Date(transaction.date).toLocaleDateString()}</div>
             <div className="w-[10%]">{transaction.time}</div>
             <div className="w-[20%]">{transaction.category}</div>
             <div className="w-[40%]">{transaction.description}</div>
