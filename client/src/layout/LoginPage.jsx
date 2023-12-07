@@ -36,7 +36,7 @@ export default function loginPage() {
 
       const data = await response.data;
       console.log(data.status);
-      //give routing details here
+      navigate("/MyApp");
     } catch (error) {
       alert("INVALID CREDENTIALS");
       setPassword("");
