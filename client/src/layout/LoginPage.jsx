@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function loginPage() {
+  const navigate = useNavigate();
+  const handleown = (event) => {
+    event.preventDefault();
+    navigate("/signup");
+  };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -86,7 +92,10 @@ export default function loginPage() {
           <div class="text-base font-medium">
             <p className="font-thin">
               Not registered?{" "}
-              <button className="font-bold"> Create account</button>{" "}
+              <button onClick={handleown} className="font-bold">
+                {" "}
+                Create account
+              </button>{" "}
             </p>
           </div>
         </div>

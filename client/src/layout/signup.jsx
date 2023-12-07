@@ -1,12 +1,14 @@
 // SignUp.jsx
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import user_icon from "../assets/person-bounding-box.svg";
 import email_icon from "../assets/envelope-at.svg";
 import password_icon from "../assets/lock.svg";
 
 function SignUp() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     firstName: "",
@@ -26,7 +28,9 @@ function SignUp() {
         "http://localhost:3000/add-user",
         formData
       );
-      console.log("User created successfully:", response.data);
+      alert("User created successfully:", response.data);
+      navigate("/");
+
       // You can redirect or perform any other actions after successful user creation
     } catch (error) {
       console.error("Error creating user:", error);
