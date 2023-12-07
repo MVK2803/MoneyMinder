@@ -11,7 +11,7 @@ const db = new pg.Client({
   user: "postgres",
   port: 5432,
   password: "root",
-  database: "moneyminder",
+  database: "postgres",
 });
 
 db.connect();
@@ -22,11 +22,12 @@ app.get("/", function (req, res) {
 });
 
 //Endpoint to fetch transactions from the database
-app.use("/api/v1/transactions", async (req, res) => {
-  console.log("Trasactions endpoint reached");
+app.post("/api/v1/transactions", async (req, res) => {
   try {
+    console.log(req.body.body.userId);
     const result = await db.query(
-      "SELECT * FROM transactions where user_id = '1'"
+      "SELECT * FROM transactions WHERE user_id = $1",
+      [req.body.body.userId]
     );
     console.log(result.rows);
     res.json(result.rows);
