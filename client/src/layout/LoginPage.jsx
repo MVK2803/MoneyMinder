@@ -1,5 +1,42 @@
+import axios from "axios";
+import { useState } from "react";
 export default function loginPage() {
-  const name="Mathew"
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  const handleLogin = async () => {
+    console.log(username);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/verify-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            username: username,
+            password: password,
+          },
+        }
+      );
+
+      const data = await response.data;
+      console.log(data.status);
+      //give routing details here
+    } catch (error) {
+      alert("INVALID CREDENTIALS");
+      setPassword("");
+      setUsername("");
+    }
+  };
   return (
     <div className="w-[60%] h-[75%] bg-white rounded-xl shadow-lg flex flex-row">
       <div class="w-[50%] h-full bg-blue-200 rounded-l-xl ">
@@ -20,6 +57,8 @@ export default function loginPage() {
             <input
               className="w-full border border-2 rounded-md focus:outline-none p-2 text-lg font-light"
               placeholder="Username"
+              value={username}
+              onChange={handleUsernameChange}
             ></input>
           </div>
           <div class="flex flex-col w-[75%]  text-lg font-medium">
@@ -28,6 +67,8 @@ export default function loginPage() {
               type="password"
               className="w-full border border-2 rounded-md focus:outline-none p-2 text-lg font-light"
               placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
             ></input>
           </div>
           <div className="flex text-lg font-medium">
@@ -35,7 +76,10 @@ export default function loginPage() {
             <p className="px-2">Remember Me</p>
           </div>
           <div>
-            <button onClick={()=>{alert("Welcome "+name)}}className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8">
+            <button
+              onClick={handleLogin}
+              className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8"
+            >
               Login to your Account
             </button>
           </div>

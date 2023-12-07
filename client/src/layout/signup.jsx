@@ -1,5 +1,6 @@
 // SignUp.jsx
 import React, { useState } from "react";
+import axios from "axios";
 
 import user_icon from "../assets/person-bounding-box.svg";
 import email_icon from "../assets/envelope-at.svg";
@@ -8,6 +9,8 @@ import password_icon from "../assets/lock.svg";
 function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -16,86 +19,103 @@ function SignUp() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data submitted:", formData);
-    // You can send this data to your backend API for further processing
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/add-user",
+        formData
+      );
+      console.log("User created successfully:", response.data);
+      // You can redirect or perform any other actions after successful user creation
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
   };
 
   return (
-    <div className="w-[30%] h-[70%] bg-white rounded-lg shadow-lg flex flex-col space-y-5  ">
+    <div className="w-[30%] h-[70%] bg-white rounded-lg shadow-lg flex flex-col space-y-5  ">
       <div className="w-full  text-center">
         <h className="text-3xl font-bold text-slate-400">
           Money<span className="text-black">Minder.</span>
         </h>
       </div>
-      <div className="items-center flex flex-col justify-center space-y-5 ">
-      <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={user_icon} alt="" classname="w-30 h-30" />
-          <input
-            type="text"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="User Name"
-          />
-        </div>
-        <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={user_icon} alt="" classname="w-30 h-30" />
-          <input
-            type="text"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="First Name"
-          />
-        </div>
-        <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={user_icon} alt="" classname="w-30 h-30" />
-          <input
-            type="text"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="Last Name"
-          />
-        </div>
-        <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={email_icon} alt="" />
-          <input
-            type="email"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="Enter E-mail"
-          />
-        </div>
-        <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={password_icon} alt="" />
-          <input
-            type="password"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="Enter Password"
-          />
-        </div>
-        <div className=" flex items-center space-x-5  w-[75%] ">
-          <img src={password_icon} alt="" />
-          <input
-            type="password"
-            name=""
-            id=""
-            className=" w-full border-2 border-gray-200 rounded-md p-1 focus:outuline-none"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div>
-            <button className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8">
+      <form onSubmit={handleSubmit}>
+        <div className="items-center flex flex-col justify-center space-y-5 ">
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={user_icon} alt="" className="w-30 h-30" />
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="User Name"
+            />
+          </div>
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={user_icon} alt="" className="w-30 h-30" />
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="First Name"
+            />
+          </div>
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={user_icon} alt="" className="w-30 h-30" />
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="Last Name"
+            />
+          </div>
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={email_icon} alt="" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="Enter E-mail"
+            />
+          </div>
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={password_icon} alt="" />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="Enter Password"
+            />
+          </div>
+          <div className=" flex items-center space-x-5  w-[75%] ">
+            <img src={password_icon} alt="" />
+            <input
+              type="password"
+              name="confirmPassword"
+              className="w-full border-2 border-gray-200 rounded-md p-1 focus:outline-none"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="text-lg bg-black hover:bg-slate-700 text-white font-medium py-2 px-4 rounded p-8"
+            >
               Create Account
             </button>
           </div>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
