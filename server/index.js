@@ -23,10 +23,12 @@ app.get("/", function (req, res) {
 
 //Endpoint to fetch transactions from the database
 app.use("/api/v1/transactions", async (req, res) => {
+  console.log("Trasactions endpoint reached");
   try {
     const result = await db.query(
-      "SELECT * FROM transactions where user_id = 1"
+      "SELECT * FROM transactions where user_id = '1'"
     );
+    console.log(result.rows);
     res.json(result.rows);
   } catch (error) {
     console.error(error);
