@@ -24,7 +24,7 @@ export default function Transactions() {
         }
       );
       const data = response.data;
-      console.log(data);
+      //console.log(data);
       setTransactions(data);
     } catch (error) {
       console.error(error);

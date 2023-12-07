@@ -127,7 +127,7 @@ const TransactionForm = ({ onClose, updateTransaction }) => {
           value={newTransaction.type}
           onChange={handleInputChange}
         >
-          <option value={0}>Expense</option>
+          <option value={1}>Expense</option>
           <option value={0}>Income</option>
         </select>
       </div>

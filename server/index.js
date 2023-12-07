@@ -24,12 +24,12 @@ app.get("/", function (req, res) {
 //Endpoint to fetch transactions from the database
 app.post("/api/v1/transactions", async (req, res) => {
   try {
-    console.log(req.body.body.userId);
+    //console.log(req.body.body.userId);
     const result = await db.query(
       "SELECT * FROM transactions WHERE user_id = $1",
       [req.body.body.userId]
     );
-    console.log(result.rows);
+    //console.log(result.rows);
     res.json(result.rows);
   } catch (error) {
     console.error(error);
