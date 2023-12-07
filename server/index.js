@@ -109,6 +109,42 @@ app.post("/add-user", async (req, res) => {
     res.status(500).json({ status: "error", message: "Internal Server Error" });
   }
 });
+
+app.get("/user-details", async (req, res) => {
+  try {
+    console.log(req.body);
+    const result = await db.query(
+      "SELECT * FROM user_details where username='test12'"
+    ); // Replace with your table name
+
+    console.log(result.rows);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+app.post("/delete-user", async (req, res) => {
+  try {
+    console.log(req.body.body);
+    const userIdToDelete = req.body; // Assuming the user ID is sent as the request body
+
+    if (!userIdToDelete) {
+      return res
+        .status(400)
+        .json({ error: "User ID is required in the request body" });
+    }
+    const result = await db.query("DELETE FROM users WHERE id = $1", [
+      userIdToDelete,
+    ]);
+
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Server is running on http://localhost:3000`);
 });

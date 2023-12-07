@@ -36,6 +36,7 @@ export default function loginPage() {
 
       const data = await response.data;
       console.log(data.status);
+      localStorage.setItem("userId", username);
       navigate("/MyApp");
     } catch (error) {
       alert("INVALID CREDENTIALS");

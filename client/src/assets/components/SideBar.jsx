@@ -70,7 +70,10 @@ export default function SideBar({ onSelectComponent, selectedComponent }) {
         <li>
           <a
             href="#"
-            className="flex items-center p-2 text-black rounded-lg hover:bg-gray-100"
+            className={`flex items-center p-2 text-black rounded-lg hover:bg-gray-100 ${
+              selectedComponent === "profile" ? "bg-gray-200" : ""
+            }`}
+            onClick={() => handleItemClick("profile")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

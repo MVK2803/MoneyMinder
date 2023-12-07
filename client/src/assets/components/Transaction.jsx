@@ -3,6 +3,7 @@ import axios from "axios";
 import TransactionForm from "./TransactionForm";
 
 export default function Transactions() {
+  const userId = localStorage.getItem("userId");
   const [transactions, setTransactions] = useState([]);
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function Transactions() {
 
   const fetchTransactions = async () => {
     try {
-      const reqBody = { userId: "MVK" }; // Replace with the actual user ID
+      const reqBody = { userId: userId }; // Replace with the actual user ID
 
       const response = await axios.post(
         "http://localhost:3000/api/v1/transactions",
