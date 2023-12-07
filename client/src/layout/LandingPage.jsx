@@ -6,10 +6,6 @@ import Chart from "../assets/components/MainGraph";
 import Accounts from "../assets/components/Account";
 
 function LandingPage() {
-  const isDarkMode =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
   return (
     <div className="w-[90%] h-[85%] bg-white rounded-lg shadow-lg flex flex-row">
       <SideBar />
