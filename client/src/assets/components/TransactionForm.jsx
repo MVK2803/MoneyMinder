@@ -1,16 +1,36 @@
-// TransactionForm.jsx
-
 import React, { useState } from "react";
+import axios from 'axios';
 
-const TransactionForm = ({onClose}) => {
+const TransactionForm = ({onClose},{fetchTransaction}) => {
     const [newTransaction, setNewTransaction] = useState({
         date: "",
         time: "",
         category: "",
         description: "",
         amount: "",
-        type: "expense", // Default to expense, you can change it if needed
+        type: 0, // Default to expense, you can change it if needed
+        user_id:1
     });
+
+    const addTransaction = async () => {
+        console.log(newTransaction);
+        try {
+          const response = await axios.post("http://localhost:3000/api/v1/addTransaction", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: (newTransaction),
+          });
+    
+          const data = await response.data;
+          console.log(data);
+          //setTransactions([...transactions, data]);
+          fetchTransaction()
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,14 +38,15 @@ const TransactionForm = ({onClose}) => {
     };
 
     const handleAddTransaction = () => {
-        onAddTransaction(newTransaction);
+        addTransaction();
         setNewTransaction({
             date: "",
             time: "",
             category: "",
             description: "",
             amount: "",
-            type: "expense",
+            type: 0,
+            user_id:1
         });
         onClose();
     };
@@ -70,8 +91,8 @@ const TransactionForm = ({onClose}) => {
             <div className="m-3 flex items-center rounded-md">
                 <label className="mr-3">Type:</label>
                 <select className="rounded-md" name="type" value={newTransaction.type} onChange={handleInputChange}>
-                    <option value="expense">Expense</option>
-                    <option value="income">Income</option>
+                    <option value={0}>Expense</option>
+                    <option value={0}>Income</option>
                 </select>
             </div>
             <div className="m-3 flex items-center">

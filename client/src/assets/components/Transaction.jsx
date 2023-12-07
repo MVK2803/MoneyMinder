@@ -7,7 +7,7 @@ export default function Transactions() {
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [transactions]);
 
   const fetchTransactions = async () => {
     try {
@@ -15,35 +15,6 @@ export default function Transactions() {
       const data = await response.json();
       console.log(data);
       setTransactions(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const addTransaction = async () => {
-    // Replace this with your form data or logic to get transaction details
-    const newTransaction = {
-      date: "03-12-2023",
-      time: "21:30",
-      category: "Food",
-      description: "Bought groceries",
-      amount: "130.02",
-      type: 1,
-      user_id: 1
-    };
-
-    try {
-      const response = await axios.post("http://localhost:3000/api/v1/addTransaction", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: (newTransaction),
-      });
-
-      const data = await response.data;
-      console.log(data);
-      setTransactions([...transactions, data]);
     } catch (error) {
       console.error(error);
     }
@@ -86,7 +57,7 @@ export default function Transactions() {
           </div>
         ))}
       </div>
-      {showTransactionForm && <TransactionForm onClose={() => {setShowTransactionForm(false)}}/>}
+      {showTransactionForm && <TransactionForm onClose={() => {setShowTransactionForm(false)}} updateTransaction={() => {fetchTransactions()}}/>}
     </div>
   );
 }
