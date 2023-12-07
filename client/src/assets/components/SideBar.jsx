@@ -1,4 +1,8 @@
-export default function SideBar() {
+export default function SideBar({ onSelectComponent, selectedComponent }) {
+  const handleItemClick = (component) => {
+    onSelectComponent(component);
+  };
+
   return (
     <div className="h-full w-1/4 px-3 py-4 overflow-y-auto rounded-l-lg border-r-2">
       <div className="flex items-center p-2">
@@ -41,7 +45,10 @@ export default function SideBar() {
         <li>
           <a
             href="#"
-            className="flex items-center p-2 text-black rounded-lg hover:bg-gray-100 "
+            className={`flex items-center p-2 text-black rounded-lg hover:bg-gray-100 ${
+              selectedComponent === "chart" ? "bg-gray-200" : ""
+            }`}
+            onClick={() => handleItemClick("chart")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +117,10 @@ export default function SideBar() {
         <li>
           <a
             href="#"
-            className="flex items-center p-2 text-black rounded-lg hover:bg-gray-100 bg-gray-200"
+            className={`flex items-center p-2 text-black rounded-lg hover:bg-gray-100 ${
+              selectedComponent === "transactions" ? "bg-gray-200" : ""
+            }`}
+            onClick={() => handleItemClick("transactions")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
